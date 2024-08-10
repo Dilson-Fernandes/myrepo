@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <%- include('./includes/navbar.ejs'); %>
-    <%- include('./includes/navbar2.ejs'); %>
-    
-    <!-- <div class="container">
-    </div> -->  
-    <%- include('./includes/info.ejs'); %>
-    <%- include('./includes/footer.ejs'); %>
+    <%- include('../includes/navbar.ejs'); %>
+    <%- include('../includes/navbar2.ejs'); %>
+    <div class="container-fluid">
+        <%- body -%>
+    </div>
+   
+    <%- include('../includes/footer.ejs'); %>
 </body>
 </html>

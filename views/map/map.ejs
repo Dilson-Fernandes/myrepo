@@ -1,0 +1,84 @@
+    <% layout("./layouts/index") %>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/css/map.css">
+    <body>
+
+   
+    <h1 style = "text-align: center">Current Disasters Map</h1>
+    <div id="map"></div>
+
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([20.5937, 78.9629], 3);
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Dummy disaster data
+        const dummyDisasterData = [
+            { name: "Sri Lanka: Floods - Dec 2020", coordinates: [7.8731, 80.7718] },
+            { name: "Indonesia: Ili Lewotolok Volcano - Nov 2020", coordinates: [-8.6774, 123.6811] },
+            { name: "Hurricane Iota - Nov 2020", coordinates: [13.4083, -81.6750] },
+            { name: "Somalia: Flash Floods - Oct 2020", coordinates: [5.1521, 46.1996] },
+            { name: "Saint Lucia: Dengue Outbreak - Aug 2020", coordinates: [13.9094, -60.9789] },
+            { name: "Typhoon Molave - Oct 2020", coordinates: [12.8654, 122.5977] },
+            { name: "DR Congo: Floods - Oct 2020", coordinates: [-4.0383, 21.7587] },
+            { name: "Guinea: Floods - Sep 2020", coordinates: [10.1246, -10.8241] },
+            { name: "Georgia: Floods - Jul 2020", coordinates: [41.7151, 44.8271] },
+            { name: "Myanmar: Floods and Landslides - Jun 2020", coordinates: [21.9162, 95.9554] },
+            { name: "Turkey: Earthquake - Jul 2023", coordinates: [38.9637, 35.2433] },
+            { name: "Philippines: Typhoon - Aug 2023", coordinates: [12.8797, 121.7740] },
+            { name: "Japan: Tsunami - Mar 2023", coordinates: [36.2048, 138.2529] },
+            { name: "Australia: Wildfires - Nov 2023", coordinates: [-25.2744, 133.7751] },
+            { name: "Haiti: Earthquake - Jan 2024", coordinates: [18.9712, -72.2852] },
+            { name: "Chile: Volcanic Eruption - Jun 2024", coordinates: [-35.6751, -71.5430] },
+            { name: "Nepal: Landslides - May 2022", coordinates: [28.3949, 84.1240] },
+            { name: "Brazil: Amazon Fires - Sep 2022", coordinates: [-14.2350, -51.9253] },
+            { name: "South Africa: Drought - Dec 2022", coordinates: [-30.5595, 22.9375] },
+            { name: "Mexico: Hurricane Patricia - Oct 2022", coordinates: [23.6345, -102.5528] },
+            { name: "Russia: Floods - Aug 2022", coordinates: [61.5240, 105.3188] },
+            { name: "India: Cyclone Fani - May 2022", coordinates: [20.5937, 78.9629] },
+            { name: "Pakistan: Heatwave - Jun 2022", coordinates: [30.3753, 69.3451] },
+            { name: "Bangladesh: Tornado - Apr 2022", coordinates: [23.685, 90.3563] },
+            { name: "Colombia: Landslides - Mar 2022", coordinates: [4.5709, -74.2973] },
+            { name: "Vanuatu: Earthquake - Nov 2022", coordinates: [-15.3767, 166.9592] },
+            { name: "Malaysia: Floods - Feb 2022", coordinates: [4.2105, 101.9758] },
+            { name: "Peru: Volcanic Eruption - Oct 2022", coordinates: [-9.1900, -75.0152] },
+            { name: "New Zealand: Earthquake - Sep 2022", coordinates: [-40.9006, 174.8860] },
+            { name: "Fiji: Cyclone - Jan 2022", coordinates: [-17.7134, 178.0650] },
+            { name: "Congo: Ebola Outbreak - May 2023", coordinates: [-0.2280, 15.8270] },
+            { name: "Ethiopia: Locust Swarm - Jun 2023", coordinates: [9.145, 40.4897] },
+            { name: "Sudan: Floods - Jul 2023", coordinates: [12.8628, 30.2176] },
+            { name: "South Korea: Typhoon - Aug 2023", coordinates: [35.9078, 127.7669] },
+            { name: "Italy: Volcano Eruption - Apr 2023", coordinates: [41.8719, 12.5674] },
+            { name: "Ukraine: War - Feb 2023", coordinates: [48.3794, 31.1656] },
+            { name: "Iran: Floods - Mar 2023", coordinates: [32.4279, 53.6880] },
+            { name: "Saudi Arabia: Dust Storm - Nov 2023", coordinates: [23.8859, 45.0792] },
+            { name: "Oman: Cyclone - Jul 2023", coordinates: [21.4735, 55.9754] },
+            { name: "Jordan: Floods - Dec 2023", coordinates: [30.5852, 36.2384] },
+            { name: "Algeria: Wildfires - Aug 2023", coordinates: [28.0339, 1.6596] },
+            { name: "Libya: Floods - Jan 2024", coordinates: [26.3351, 17.2283] },
+            { name: "Ivory Coast: Floods - Oct 2023", coordinates: [7.539989, -5.547080] },
+            { name: "Morocco: Earthquake - Sep 2023", coordinates: [31.7917, -7.0926] },
+            { name: "Senegal: Drought - Apr 2023", coordinates: [14.6928, -14.0068] },
+            { name: "Mali: Floods - Nov 2023", coordinates: [17.5707, -3.9962] },
+            { name: "Chad: Locust Infestation - Aug 2023", coordinates: [15.4542, 18.7322] },
+            { name: "Niger: Floods - Dec 2023", coordinates: [17.6078, 8.0817] },
+            { name: "Central African Republic: War - Jul 2023", coordinates: [6.6111, 20.9394] }
+        ];
+
+        // Add markers for each disaster
+        dummyDisasterData.forEach(disaster => {
+            const [latitude, longitude] = disaster.coordinates;
+            L.marker([latitude, longitude])
+                .addTo(map)
+                .bindPopup(`<strong>${disaster.name}</strong>`)
+                .openPopup();
+        });
+    </script>
+</body>
