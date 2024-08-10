@@ -1,0 +1,41 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <h2> 
+            Signup to Disaster Awarness
+        </h2>
+        <form action="/user/signup" method="post" novalidate class="needs-validation">
+            <div class="mb-3">
+                <lable for="username" class="form-label">Username</lable>
+                <input type="text" name="username" id="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <lable for="password" class="form-label">Password</lable>
+                <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <lable for="email" class="form-label">Email</lable>
+                <input type="text" name="email" id="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <lable for="phone" class="form-label">Phone Number</lable>
+                <input type="number" name="phone" id="phone" class="form-control" required>  
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-8">
+                    <lable for="location" class="form-label">Location</lable>
+                    <input type="text" name="location" id="location" class="form-control" required>  
+                </div>
+                <div class="mb-3 col-md-4">
+                    <lable for="country" class="form-label">Country</lable>
+                    <input type="text" name="country" id="country" class="form-control" required>  
+                </div>    
+            </div>
+            <button type="submit" class="btn btn-success">SignUp</button>
+        </form>
+    </div>
+</div>
+
+<script src="/js/form.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
