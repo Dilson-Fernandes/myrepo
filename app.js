@@ -71,37 +71,33 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
+app.use((req,res,next)=>{
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    res.locals.currUser = req.user;
+    next();
+})
+
 app.get("/",(req,res)=>{
     res.send("you are in the root page");
 })
 
+app.get("/index",(req,res)=>{
+    const user = req.user;
+    res.render("index",{user});
+})
 app.use("/user",userRouter);
 
 
 app.all('*',(req,res,next)=>{
-    next(new ExpressError(404,"page not found!"));
+    res.send("page not found");
 });
-
 app.use((err,req,res,next)=>{
     let {statusCode=500,message="async function error"}=err;
-    res.status(statusCode).render("./listings/error.ejs",{message});
-    //res.status(statusCode).send(message);
+    res.status(statusCode).render("./error.ejs",{message});
 })
 app.listen(port,()=>{
     console.log("server is running on port " + port);
 })
-
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.render("index.ejs");
-});
-
-app.listen(port, () => {
-  console.log("server is running on port " + port);
-});
 

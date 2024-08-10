@@ -61,6 +61,7 @@ router.get("/logout",(req,res)=>{
     req.logout((err)=>{
         if(err)
         {
+            console.log(err);
             return next(err);
         }
         req.flash("success","Logged out successfully");
