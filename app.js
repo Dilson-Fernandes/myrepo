@@ -1,5 +1,3 @@
-
-
 require("dotenv").config();
 
 const express = require("express");
@@ -14,20 +12,23 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 
+
 const wrapAsync=require('./utils/wrapAsync.js');
 const ExpressError=require('./utils/ExpressError.js')
 
+
 const port = 3000;
 async function main() {
-    await mongoose.connect(process.env.DB_URL);
+  await mongoose.connect(process.env.DB_URL);
 }
 main()
-.then(()=>{
+  .then(() => {
     console.log("Connected to MongoDB");
-})
-.catch((err)=>{
-    console.log("unable to connect to database")
-})
+  })
+  .catch((err) => {
+    console.log("unable to connect to database");
+  });
+
 
 const store = MongoStore.create({
     mongoUrl: process.env.DB_URL,
@@ -89,3 +90,18 @@ app.use((err,req,res,next)=>{
 app.listen(port,()=>{
     console.log("server is running on port " + port);
 })
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.render("index.ejs");
+});
+
+app.listen(port, () => {
+  console.log("server is running on port " + port);
+});
+

@@ -1,0 +1,25 @@
+.icon-container {
+    /* background-color: #ffffff; */
+    border-radius: 50%;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+.card-body h5 {
+    color: #ffffff;
+}
+
+.rowinfo {
+    justify-content: space-evenly !important;
+    column-gap: 5rem !important;
+}
+.card {
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    color: #ffffff;
+}
+
+.info-color {
+    background-color: #033145;
+}
